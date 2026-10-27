@@ -1,0 +1,15 @@
+{
+  "name": "pg-manager-mern",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PG / hostel management app (MongoDB, Express, React, Node)",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "seed": "npm run seed --prefix server",
+    "test": "npm test --prefix server",
+    "build": "npm run build --prefix client",
+    "start": "npm start --prefix server"
+  },
+  "devDependencies": { "concurrently": "^9.1.0" }
+}
