@@ -1,0 +1,89 @@
+:root {
+  --bg: #f4f6f8; --card: #fff; --text: #1d2433; --muted: #667085; --line: #e4e7ec;
+  --brand: #2f6fed; --brand-dark: #2458c4; --green: #12804a; --green-bg: #e3f6ec;
+  --amber: #a15c07; --amber-bg: #fff2d9; --red: #b42318; --red-bg: #fde8e6; --blue-bg: #e6eefe;
+  --radius: 12px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); }
+h1 { font-size: 1.35rem; margin: 0 0 .75rem; } h2 { font-size: 1.05rem; margin: 1.25rem 0 .5rem; } h3 { font-size: 1rem; margin: 0; }
+a { color: var(--brand); text-decoration: none; }
+.muted { color: var(--muted); font-size: .88rem; }
+.hidden { display: none !important; }
+
+/* shell */
+header.top { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: .75rem; padding: .65rem 1rem; background: var(--card); border-bottom: 1px solid var(--line); }
+.brand { font-weight: 700; font-size: 1.1rem; margin-right: auto; }
+main { max-width: 980px; margin: 0 auto; padding: 1rem 1rem 6rem; }
+nav.tabs { position: fixed; bottom: 0; left: 0; right: 0; z-index: 5; display: flex; background: var(--card); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); }
+nav.tabs a { flex: 1; text-align: center; padding: .7rem .25rem; color: var(--muted); font-size: .82rem; }
+nav.tabs a.active { color: var(--brand); font-weight: 600; box-shadow: inset 0 2px 0 var(--brand); }
+@media (min-width: 800px) {
+  nav.tabs { position: static; border: 0; padding: 0; background: none; gap: .25rem; }
+  nav.tabs a { flex: none; padding: .4rem .8rem; border-radius: 8px; font-size: .95rem; box-shadow: none !important; }
+  nav.tabs a.active { background: var(--blue-bg); }
+  main { padding-bottom: 2rem; }
+}
+
+/* cards & lists */
+.card, .item { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: .9rem 1rem; }
+.grid { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.stat .num { font-size: 1.5rem; font-weight: 700; margin-top: .15rem; }
+.list { display: grid; gap: .6rem; }
+.item { display: flex; flex-wrap: wrap; gap: .5rem .9rem; align-items: center; }
+.item .grow { flex: 1 1 200px; min-width: 0; }
+.item .amt { text-align: right; min-width: 110px; }
+.row { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.row.between { justify-content: space-between; }
+.subpay { flex-basis: 100%; border-top: 1px dashed var(--line); padding-top: .4rem; font-size: .88rem; color: var(--muted); display: grid; gap: .2rem; }
+progress { width: 100%; height: 10px; accent-color: var(--brand); margin-top: .4rem; }
+.beds { display: grid; gap: .6rem; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.bed { border: 1px solid var(--line); border-radius: 10px; padding: .7rem .8rem; background: var(--card); display: grid; gap: .35rem; }
+.bed.vacant { border-style: dashed; }
+
+.badge { display: inline-block; padding: .12rem .6rem; border-radius: 99px; font-size: .78rem; font-weight: 600; white-space: nowrap; }
+.badge.paid, .badge.resolved, .badge.vacant { background: var(--green-bg); color: var(--green); }
+.badge.due, .badge.in_progress { background: var(--amber-bg); color: var(--amber); }
+.badge.overdue, .badge.open { background: var(--red-bg); color: var(--red); }
+.badge.occupied { background: var(--blue-bg); color: var(--brand-dark); }
+
+/* controls */
+button, .btn { font: inherit; border: 1px solid var(--line); background: var(--card); color: var(--text); padding: .5rem .9rem; border-radius: 8px; cursor: pointer; min-height: 40px; }
+button.primary { background: var(--brand); border-color: var(--brand); color: #fff; }
+button.primary:hover { background: var(--brand-dark); }
+button.small { padding: .25rem .7rem; min-height: 34px; font-size: .88rem; }
+button.link { border: 0; background: none; color: var(--brand); padding: .25rem .4rem; min-height: 0; }
+button:disabled { opacity: .6; cursor: wait; }
+label { display: grid; gap: .25rem; font-size: .9rem; font-weight: 500; }
+input, select, textarea { font: inherit; width: 100%; padding: .55rem .65rem; border: 1px solid #c9ced8; border-radius: 8px; background: #fff; color: var(--text); }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
+.field-error { color: var(--red); font-size: .82rem; font-weight: 400; }
+label.invalid input, label.invalid select, label.invalid textarea { border-color: var(--red); }
+.form-error { background: var(--red-bg); color: var(--red); padding: .6rem .8rem; border-radius: 8px; font-size: .9rem; }
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0 1rem; }
+.filters select { width: auto; }
+
+dialog { border: 0; border-radius: 14px; padding: 0; width: min(480px, calc(100vw - 1.5rem)); max-height: 92vh; }
+dialog::backdrop { background: rgba(16, 24, 40, .5); }
+dialog form { display: grid; gap: .8rem; padding: 1.1rem; }
+dialog .actions { display: flex; gap: .5rem; justify-content: flex-end; }
+#toast { position: fixed; left: 50%; bottom: 5rem; transform: translateX(-50%); background: #1d2433; color: #fff; padding: .6rem 1rem; border-radius: 10px; opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 20; max-width: 90vw; }
+#toast.show { opacity: 1; }
+#toast.error { background: var(--red); }
+
+/* login */
+.login { max-width: 400px; margin: 8vh auto 0; padding: 0 1rem; }
+.login form { display: grid; gap: .8rem; }
+.demo { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
+
+/* receipt */
+.receipt { max-width: 560px; margin: 0 auto; }
+.receipt dl { display: grid; grid-template-columns: 1fr auto; gap: .4rem 1rem; margin: 1rem 0; }
+.receipt dt { color: var(--muted); } .receipt dd { margin: 0; text-align: right; font-weight: 500; }
+@media print {
+  header.top, nav.tabs, .no-print, #toast { display: none !important; }
+  body { background: #fff; } main { padding: 0; } .card { border: 1px solid #999; }
+}
+.block { margin-bottom: .8rem; } .mt { margin-top: .75rem; } .mb { margin-bottom: .5rem; }
+.center { text-align: center; padding: 2rem 0; }
+dialog[open] { display: block; }
